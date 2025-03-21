@@ -1,0 +1,31 @@
+version: "3"
+services:
+  servidor_web:
+    build: ./docker3
+    container_name: servidor-web
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./data:/data
+    networks:
+      - serverpy
+    restart: on-failure
+
+  guardar_fecha:
+    build: ./docker2
+    container_name: guardar-fecha
+    volumes:
+      - ./data:/output
+    networks:
+      - serverpy
+    restart: on-failure
+
+  fechora:
+    build: ./docker1
+    container_name: fecHora
+    networks:
+      - serverpy
+    restart: on-failure
+
+networks:
+  serverpy:
